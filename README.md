@@ -6,8 +6,7 @@ Complete Python CLI application to manage hospital beds, patients, admissions, r
 - Undo stack
 - Automatic daily backup (JSON)
 - SMS/WhatsApp alerts placeholder (Twilio)
-- Colorized terminal UI using rich
-- Unit tests (unittest)
+
 
 Setup
 1. Create virtual environment:
