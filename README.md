@@ -1,46 +1,34 @@
 Hospital Bed Management System (CLI Version)
 
 A fully self-contained command-line Hospital Bed Management System built in Python.
-It provides:
+It supports bed management, patient handling, admissions, authentication, backups, alerts, reporting, and more.
 
-Bed, patient, and admission management
+Core Features
+1. Bed Management
 
-Role-based access control (Admin / Clerk)
-
-Undo stack for reversible actions
-
-Database persistence (SQLite)
-
-Backup system (JSON-based, rotating last 7 backups)
-
-Twilio-based alerting (optional; safe fallbacks included)
-
-Basic reporting tools
-
-Input validation using regex
-
-TDD-ready unit test structure (suggested directory tree support)
-
-Features Overview
- Bed Management
-
-Add beds (admins only)
+Add new beds (Admin only)
 
 View all beds
 
-Search beds (ward, equipment, availability)
+Search beds by:
 
-Track occupied vs free beds automatically
+Ward
 
- Patient Management
+Equipment
+
+Availability
+
+Automatic tracking of occupied vs free beds
+
+2. Patient Management
 
 Add patient records
 
 Regex-based search for patient names
 
-View full patient list
+View complete patient list
 
- Admission Control
+3. Admission Control
 
 Admit patients to beds
 
@@ -48,9 +36,9 @@ Transfer patients between beds
 
 Discharge patients with automatic bed cleanup
 
- Undo Stack
+Undo Stack
 
-Every destructive action pushes an undo operation, allowing you to revert:
+Every action that modifies data is recorded, enabling safe rollbacks:
 
 Admissions
 
@@ -58,33 +46,66 @@ Transfers
 
 Discharges
 
- User Authentication
+This provides protection against accidental operations.
 
-Role-based access (admin, clerk)
+User Authentication
 
-Password hashing via SHA-256
+Role-based access:
 
-Automatic bootstrap admin user (admin / admin)
+Admin
 
- Backup System
+Clerk
 
-Saves database state to JSON
+Password hashing using SHA-256
 
-Keeps the last 7 backups
+Automatic bootstrap admin account:
 
-Admin-only operation
+Username: admin
 
- Alert System (Twilio)
+Password: admin
 
-Optional SMS alerts when ICU/HDU reach full capacity
+Database and Persistence
 
-Auto-detects Twilio credentials
+Uses SQLite for all system data
 
-Safe fallback mode prints alerts instead of sending SMS
+Automatically initializes on first run
 
- Reports
+Reliable storage for patients, beds, and admissions
+
+Backup System
+
+Saves entire database into a JSON snapshot
+
+Maintains the last 7 rotating backups
+
+Backup actions restricted to Admin users
+
+Designed to avoid overwriting the last valid backup
+
+Alert System (Twilio)
+
+Optional SMS alerts for ICU/HDU full-capacity notifications.
+
+Modes:
+
+Live Twilio Mode
+Activated when valid Twilio credentials are detected.
+
+Safe Fallback Mode
+Prints alerts to the console when Twilio credentials are missing.
+
+Reporting Tools
+
+Provides essential operational reports such as:
 
 Ward occupancy statistics
 
 List of free beds
 
+Admission summaries
+
+Input Validation
+
+Uses regular expressions to validate user inputs
+
+Prevents invalid names, bed identifiers, and other improper entries
